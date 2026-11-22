@@ -1,0 +1,15 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {analyze,inspectURL} from '../src/engine.mjs';
+test('Arabic authority pressure produces evidence and elevated risk',()=>{const a=analyze('شرطة أبوظبي: لديك مخالفة. ادفع خلال 30 دقيقة لتجنب الإجراء القانوني https://adpolice.gov.ae.payment.example');assert.ok(a.finalScore>=65);assert.ok(a.findings.some(f=>f.id==='threat'));assert.equal(a.urls[0].host,'adpolice.gov.ae.payment.example');});
+test('No URL is explicitly unavailable, not a technical safe score',()=>{assert.equal(analyze('Hello friend').technicalScore,null);});
+test('Brand reference match respects label boundary',()=>{assert.equal(inspectURL('https://www.adpolice.gov.ae').score,0);assert.ok(inspectURL('https://adpolice.gov.ae.evil.example').findings.some(f=>f.id==='brand_mismatch'));assert.ok(inspectURL('https://notadpolice.gov.ae').score>=45);});
+test('Userinfo deception exposes true host',()=>{const a=inspectURL('https://adpolice.gov.ae@evil.example');assert.equal(a.host,'evil.example');assert.ok(a.score>=35);});
+test('IP, HTTP and punycode features',()=>{assert.ok(inspectURL('http://127.0.0.1').score>=35);assert.ok(inspectURL('https://xn--pple-43d.example').score>=20);});
+test('One-character reference typo',()=>{assert.ok(inspectURL('https://adpol1ce.example').score>=45);});
+test('Explicit English and Arabic safety advice avoids OTP false alarm',()=>{for(const t of ['Never share your OTP with anyone including bank staff.','لا تشارك رمز التحقق مع اي شخص حتى موظف البنك'])assert.ok(analyze(t).finalScore<30);});
+test('Separate malicious sentence remains visible after safety advice',()=>{assert.ok(analyze('Never share your OTP. Pay immediately or face arrest.').finalScore>=60);});
+test('Input validation and normalization',()=>{for(const text of ['',null,' '.repeat(2),'a'.repeat(12001)])assert.throws(()=>analyze(text));assert.ok(analyze('أَرْسِل رمز التحقق الآن').findings.some(f=>f.id==='credential'));});
+test('URL cap and no network claim are explicit',()=>{const a=analyze(Array.from({length:25},(_,i)=>`https://h${i}.example`).join(' '));assert.equal(a.coverage.urlsAnalyzed,20);assert.equal(a.coverage.urlsOmitted,5);assert.equal(a.coverage.fetched,false);});
+test('Scores remain bounded and deterministic',()=>{const t='Urgent police arrest pay now send OTP secret prize';const a=analyze(t);assert.deepEqual(a,analyze(t));assert.ok(a.finalScore<=100);assert.ok(a.finalScore>=a.manipulationScore);assert.ok(a.model.contribution<=10);});
+test('Unknown vocabulary does not manufacture ML certainty',()=>{assert.equal(analyze('xyzzy flibbertigibbet').model.knownTokens,0);assert.equal(analyze('xyzzy flibbertigibbet').model.contribution,0);});

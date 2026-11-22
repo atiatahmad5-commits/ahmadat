@@ -1,0 +1,22 @@
+[
+ {"id":"S01","label":1,"text":"شرطة أبوظبي: لديك مخالفة. ادفع خلال 30 دقيقة لتجنب الإجراء القانوني https://adpolice.gov.ae.payment-review.example/pay"},
+ {"id":"S02","label":1,"text":"Your bank account faces closure. Provide your password now."},
+ {"id":"S03","label":1,"text":"You won the lottery. Pay the processing fee now."},
+ {"id":"S04","label":1,"text":"حول المبلغ بسرية الان ولا تخبر أحدا"},
+ {"id":"S05","label":1,"text":"https://adpolice.gov.ae@billing.example/pay"},
+ {"id":"S06","label":1,"text":"https://emiratesnbd-login.example/verify"},
+ {"id":"S07","label":1,"text":"Urgent police penalty. Pay immediately to prevent arrest."},
+ {"id":"S08","label":1,"text":"ارسل رمز التحقق فورا لتجنب تعليق حسابك"},
+ {"id":"S09","label":1,"text":"Send your card number to collect the prize now."},
+ {"id":"S10","label":1,"text":"Look who posted your private photos https://bit.ly/example"},
+ {"id":"L01","label":0,"text":"Your dentist appointment is at 9 tomorrow."},
+ {"id":"L02","label":0,"text":"موعد اجتماع الفريق غدا الساعة العاشرة"},
+ {"id":"L03","label":0,"text":"Do not share your password with bank support."},
+ {"id":"L04","label":0,"text":"لا ترسل رمز التحقق الى اي شخص"},
+ {"id":"L05","label":0,"text":"https://www.adpolice.gov.ae/"},
+ {"id":"L06","label":0,"text":"https://www.emiratesnbd.com/"},
+ {"id":"L07","label":0,"text":"The library has received the books you requested."},
+ {"id":"L08","label":0,"text":"يرجى قراءة محضر الجلسة قبل اجتماعنا"},
+ {"id":"L09","label":0,"text":"Payment receipt for your completed purchase is ready in the app."},
+ {"id":"L10","label":0,"text":"Security reminder: never share your OTP. Use the bank app."}
+]

@@ -1,0 +1,23 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {once} from 'node:events';
+test('HTTP integration: health, Arabic, validation, origin and routing',async t=>{
+ const port=String(20000+Math.floor(Math.random()*20000));
+ const child=spawn(process.execPath,['src/server.mjs'],{cwd:new URL('..',import.meta.url),env:{...process.env,PORT:port},stdio:['ignore','pipe','pipe']});
+ t.after(()=>child.kill());
+ await Promise.race([once(child.stdout,'data'),new Promise((_,reject)=>{const timer=setTimeout(()=>reject(new Error('Server startup timeout')),5000);timer.unref();})]);
+ const base=`http://127.0.0.1:${port}`;
+ assert.equal((await (await fetch(base+'/api/health')).json()).ok,true);
+ const post=(text,extra={})=>fetch(base+'/api/analyze',{method:'POST',headers:{'Content-Type':'application/json',...extra},body:JSON.stringify({text})});
+ const good=await post('ارسل رمز التحقق الان لتجنب تعليق حسابك');
+ assert.equal(good.status,200);assert.ok((await good.json()).finalScore>=65);
+ assert.equal((await post('')).status,400);
+ assert.equal((await post('a'.repeat(12001))).status,400);
+ assert.equal((await post('a'.repeat(51000))).status,413);
+ assert.equal((await post('hello',{'Origin':'https://untrusted.example'})).status,403);
+ assert.equal((await fetch(base+'/api/analyze',{method:'POST',body:'text'})).status,415);
+ assert.equal((await fetch(base+'/missing')).status,404);
+ const page=await fetch(base+'/');assert.equal(page.status,200);assert.ok(page.headers.get('content-security-policy').includes("default-src 'self'"));
+ assert.match(await page.text(),/SCAMSHIELD/);
+});
