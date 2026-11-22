@@ -84,7 +84,7 @@ Screenshot upload/OCR, QR decoding, webpage fetch/render, redirect following, do
 
 ## GitHub delivery
 
-Use branch **master** as requested. The local handoff is prepared for Git. Remote publication requires the team's chosen GitHub repository and authenticated access. Follow [delivery checklist](docs/DELIVERY.md); do not claim upload until the remote commit and branch are verified. CI runs tests and prints evaluation on push/PR.
+The complete project is published on **[master](https://github.com/atiatahmad5-commits/ahmadat/tree/master)**. The default `main` branch also contains the delivery snapshot. Continue challenge development on `master`. [GitHub Actions passed the initial uploaded implementation](https://github.com/atiatahmad5-commits/ahmadat/actions/runs/45065940250) on Node.js 22. CI runs tests and prints evaluation on push/PR. Follow the [delivery checklist](docs/DELIVERY.md) for rehearsal and submission.
 
 ## Privacy and originality
 

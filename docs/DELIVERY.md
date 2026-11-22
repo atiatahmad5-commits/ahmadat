@@ -27,15 +27,16 @@
 
 ## GitHub
 
-المستودع المحلي المطلوب فرعه master. لا يتضمن مفاتيح أو ملفات حساسة. اسم الحساب والمستودع البعيد غير محددين بعد. بعد اختيار مستودع فارغ بحساب الفريق وتوفير دخول معتمد:
+تم رفع المشروع إلى https://github.com/atiatahmad5-commits/ahmadat/tree/master ونجحت اختبارات النسخة المرفوعة على GitHub Actions. فرع master يحتوي المشروع كاملًا، وmain يحتوي نسخة التسليم أيضًا. لا يتضمن المشروع مفاتيح أو ملفات ضحايا. لتنزيله على جهاز حمودة:
 
 ```sh
-git remote add origin https://github.com/OWNER/REPOSITORY.git
-git push -u origin master
-git ls-remote --heads origin master
+git clone --branch master https://github.com/atiatahmad5-commits/ahmadat.git
+cd ahmadat
+node --test
+node src/server.mjs
 ```
 
-`OWNER/REPOSITORY` مكانان لاستبدال اسم الفريق والمستودع، وليس رابطًا تم إنشاؤه. لا تستعمل force push. إن كان المستودع موجودًا ويحتوي عملًا، افحصه وادمج بأمان بدل استبداله. تحقق من نجاح CI، وأن لجنة التحكيم تستطيع القراءة، وأن README والكود والوثائق موجودة في نفس commit. لا تغيّر إعدادات الظهور العام دون قرار الفريق.
+تابع التطوير على master ولا تستعمل force push. قبل التسليم تحقق من نجاح CI لأحدث commit، وأن لجنة التحكيم تستطيع القراءة، وأن README والكود والوثائق موجودة في نفس commit. بقي تنزيل ملف PowerPoint من عارض العرض وإضافته لحزمة تسليم المسابقة؛ الكود والوثائق موجودان في المستودع، لكن ملف PPTX ليس ضمنه.
 
 ## قائمة بروفة العرض
 

@@ -2,7 +2,7 @@
 
 ## Automated behavior checks
 
-`node --test`: 13 tests passed on the local Node.js 24.22.3 runtime. Coverage includes Arabic pressure evidence, no-URL state, reference-domain boundaries, userinfo deception, IP/HTTP/punycode, brand typo, English/Arabic safety advice, separate malicious clauses, input validation, URL caps, score bounds, unknown vocabulary, and HTTP integration. The HTTP test covers successful Arabic analysis, invalid/oversized input, wrong origin/content type, missing routes and security headers. Node.js 22 CI is configured but has not run remotely.
+`node --test`: 13 tests passed on the local Node.js 24.22.3 runtime and the uploaded implementation passed CI on Node.js 22. Coverage includes Arabic pressure evidence, no-URL state, reference-domain boundaries, userinfo deception, IP/HTTP/punycode, brand typo, English/Arabic safety advice, separate malicious clauses, input validation, URL caps, score bounds, unknown vocabulary, and HTTP integration. The HTTP test covers successful Arabic analysis, invalid/oversized input, wrong origin/content type, missing routes and security headers.
 
 ## Synthetic classifier smoke evaluation
 
@@ -18,4 +18,4 @@ Ten editable slides saved in the shared presentation viewer; all ten rendered an
 
 ## Remaining release gates
 
-Remote GitHub publication is pending: account connection succeeded, no accessible repository was listed, and repository creation in the browser requires sign-in. No remote commit, CI pass or public sharing is claimed. Two-device/offline rehearsal and real-data validation remain team tasks. There is no production-readiness or competition-compliance certification.
+The complete source was published to [atiatahmad5-commits/ahmadat on master](https://github.com/atiatahmad5-commits/ahmadat/tree/master), with the delivery snapshot also on main. Implementation commit `19bccb25096a8c19b4cd192c3713693ec9019810` passed [GitHub Actions on Node.js 22](https://github.com/atiatahmad5-commits/ahmadat/actions/runs/45065940250). This supersedes the initial local-only delivery status. Two-device/offline rehearsal and real-data validation remain team tasks. There is no production-readiness or competition-compliance certification.
